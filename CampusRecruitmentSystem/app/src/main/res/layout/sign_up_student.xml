@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:id="@+id/studentNameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nameEditTextHint"/>
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:id="@+id/studentIdEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/studentIdEditTextHint"/>
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:id="@+id/studentEmailEt"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:id="@+id/studentPasswordEt"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,11 +69,11 @@
         android:layout_marginTop="10dp">
 
         <EditText
+            android:id="@+id/studentCpasswordEt"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirmPasswordEditTextHint"
-            android:id="@+id/editText" />
+            android:hint="@string/confirmPasswordEditTextHint" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -77,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/dob"
+            android:id="@+id/studentDob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dobEditTextHint"/>
@@ -88,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:id="@+id/studentGpaEt"
             android:inputType="numberDecimal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,6 +124,7 @@
     </RadioGroup>
 
     <Button
+        android:id="@+id/signUpBtn"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="20dp"

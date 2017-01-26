@@ -134,7 +134,9 @@ public class CompanyAuth extends BaseActivity {
                                                 sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),2).apply();
 
                                                 progressDialog.dismiss();
-                                                startActivity(new Intent(getContext(), CompaniesDashboard.class));
+                                                Intent intent = new Intent(getContext(), CompaniesDashboard.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
                                             }
                                         });
                                     }
