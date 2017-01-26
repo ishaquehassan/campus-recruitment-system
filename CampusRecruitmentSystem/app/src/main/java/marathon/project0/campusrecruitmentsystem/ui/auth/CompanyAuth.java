@@ -55,7 +55,9 @@ public class CompanyAuth extends BaseActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
                 sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),2).apply();
 
-                startActivity(new Intent(CompanyAuth.this, CompaniesDashboard.class));
+                Intent intent = new Intent(CompanyAuth.this, CompaniesDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         pages.add(signInFragment);

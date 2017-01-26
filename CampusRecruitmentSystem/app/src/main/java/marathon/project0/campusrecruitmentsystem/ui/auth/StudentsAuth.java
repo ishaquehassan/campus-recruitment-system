@@ -60,7 +60,9 @@ public class StudentsAuth extends BaseActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
                 sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),3).apply();
 
-                startActivity(new Intent(StudentsAuth.this, StudentsDashboard.class));
+                Intent intent = new Intent(StudentsAuth.this, StudentsDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         pages.add(signInFragment);

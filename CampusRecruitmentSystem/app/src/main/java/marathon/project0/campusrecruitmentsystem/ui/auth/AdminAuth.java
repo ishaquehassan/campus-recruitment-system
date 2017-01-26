@@ -1,6 +1,7 @@
 package marathon.project0.campusrecruitmentsystem.ui.auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,11 +10,11 @@ import android.view.View;
 import java.util.ArrayList;
 
 import marathon.project0.campusrecruitmentsystem.R;
+import marathon.project0.campusrecruitmentsystem.adapters.general.SimplePagerAdapter;
 import marathon.project0.campusrecruitmentsystem.base.BaseActivity;
 import marathon.project0.campusrecruitmentsystem.base.BaseFragment;
 import marathon.project0.campusrecruitmentsystem.ui.auth.general.SignInFragment;
-import marathon.project0.campusrecruitmentsystem.adapters.general.SimplePagerAdapter;
-import marathon.project0.campusrecruitmentsystem.ui.dashboards.StudentsDashboard;
+import marathon.project0.campusrecruitmentsystem.ui.dashboards.AdminDashboard;
 
 public class AdminAuth extends BaseActivity {
 
@@ -32,7 +33,12 @@ public class AdminAuth extends BaseActivity {
         signInFragment.setLoggedInListener(new SignInFragment.OnLoggedInListener() {
             @Override
             public void onLoggedIn() {
-                startActivity(new Intent(AdminAuth.this, StudentsDashboard.class));
+                SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
+                sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),1).apply();
+
+                Intent intent = new Intent(AdminAuth.this, AdminDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
         pages.add(signInFragment);

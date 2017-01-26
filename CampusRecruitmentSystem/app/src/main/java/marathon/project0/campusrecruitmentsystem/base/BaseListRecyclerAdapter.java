@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import marathon.project0.campusrecruitmentsystem.R;
@@ -16,6 +17,15 @@ import marathon.project0.campusrecruitmentsystem.R;
 public abstract class BaseListRecyclerAdapter extends RecyclerView.Adapter<BaseListRecyclerAdapter.ItemViewHolder> {
 
     private OnItemClick itemClick;
+    private OnDeleteClick deleteClick;
+
+    public OnDeleteClick getDeleteClick() {
+        return deleteClick;
+    }
+
+    public void setDeleteClick(OnDeleteClick deleteClick) {
+        this.deleteClick = deleteClick;
+    }
 
     public BaseListRecyclerAdapter(){
 
@@ -34,12 +44,14 @@ public abstract class BaseListRecyclerAdapter extends RecyclerView.Adapter<BaseL
         public TextView title;
         public TextView subTitle;
         public ImageButton itemDeleteBtn;
+        public LinearLayout viewDetails;
 
         ItemViewHolder(View itemView ) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.itemTitle);
             subTitle = (TextView) itemView.findViewById(R.id.itemSubTitle);
             itemDeleteBtn = (ImageButton) itemView.findViewById(R.id.itemDeleteBtn);
+            viewDetails = (LinearLayout) itemView.findViewById(R.id.viewDetails);
         }
     }
 
@@ -50,5 +62,9 @@ public abstract class BaseListRecyclerAdapter extends RecyclerView.Adapter<BaseL
 
     public interface OnItemClick{
         void onItemClick(int position,View v);
+    }
+
+    public interface OnDeleteClick{
+        void onDeleteClick(int position,View v);
     }
 }

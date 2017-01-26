@@ -31,16 +31,24 @@ public class CompaniesAdapter extends BaseListRecyclerAdapter {
     public void onBindViewHolder(final BaseListRecyclerAdapter.ItemViewHolder holder, final int position) {
         holder.title.setText(companies.get(position).getName());
         holder.subTitle.setText(companies.get(position).getEmail());
-        if(!isAdmin){
-            holder.itemDeleteBtn.setVisibility(View.GONE);
-        }
         if(getItemClick() != null){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.viewDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getItemClick().onItemClick(position,holder.itemView);
                 }
             });
+        }
+        if(!isAdmin){
+            holder.itemDeleteBtn.setVisibility(View.GONE);
+            if(getDeleteClick() != null){
+                holder.itemDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getDeleteClick().onDeleteClick(position,null);
+                    }
+                });
+            }
         }
     }
 

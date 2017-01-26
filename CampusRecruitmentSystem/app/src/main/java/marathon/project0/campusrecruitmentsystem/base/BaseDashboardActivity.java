@@ -35,7 +35,7 @@ public class BaseDashboardActivity extends BaseActivity {
     protected void setToolbarTitle(String title){
         toolbar_layout.setTitle(title);
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
