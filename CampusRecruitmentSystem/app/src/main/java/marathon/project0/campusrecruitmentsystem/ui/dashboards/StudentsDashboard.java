@@ -1,6 +1,7 @@
 package marathon.project0.campusrecruitmentsystem.ui.dashboards;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,7 +109,7 @@ public class StudentsDashboard extends BaseDashboardActivity {
 
                 @Override
                 public void onItemClick(int position,View v) {
-
+                    viewDetails(companies.get(position));
                 }
             });
 
@@ -164,6 +167,29 @@ public class StudentsDashboard extends BaseDashboardActivity {
             companiesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
             return getFragmentView();
+        }
+
+        private void viewDetails(Company company){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.company_view_dialog, null);
+            dialogBuilder.setView(dialogView);
+
+            TextView name = (TextView) dialogView.findViewById(R.id.companyName);
+            name.setText(company.getName());
+
+            TextView email = (TextView) dialogView.findViewById(R.id.companyEmail);
+            email.setText(company.getEmail());
+
+            dialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialogBuilder.setCancelable(false);
+            AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.show();
         }
     }
 
@@ -278,7 +304,6 @@ public class StudentsDashboard extends BaseDashboardActivity {
                             studentCpasswordEt.setError("Confirmed Password does not math with Password");
                             return;
                         }
-                        return;
                     }
 
                     if(dob.length() <= 0){
@@ -304,13 +329,18 @@ public class StudentsDashboard extends BaseDashboardActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
                             sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),3).apply();
-                            auth.getCurrentUser().updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getContext(),"Profile Updated",Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            if(password.length() > 0){
+                                auth.getCurrentUser().updatePassword(password).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(getContext(),"Profile Updated",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }else{
+                                progressDialog.dismiss();
+                                Toast.makeText(getContext(),"Profile Updated",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }

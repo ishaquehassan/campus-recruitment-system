@@ -1,10 +1,12 @@
 package marathon.project0.campusrecruitmentsystem.ui.dashboards;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -91,7 +94,7 @@ public class CompaniesDashboard extends BaseDashboardActivity {
 
                 @Override
                 public void onItemClick(int position,View v) {
-                    
+                    viewDetails(students.get(position));
                 }
             });
 
@@ -149,6 +152,38 @@ public class CompaniesDashboard extends BaseDashboardActivity {
             companiesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
             return getFragmentView();
+        }
+
+        private void viewDetails(Student student){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.student_view_dialog, null);
+            dialogBuilder.setView(dialogView);
+
+            TextView name = (TextView) dialogView.findViewById(R.id.studentName);
+            name.setText(student.getName());
+
+            TextView id = (TextView) dialogView.findViewById(R.id.studentId);
+            id.setText(student.getStudentId());
+
+            TextView email = (TextView) dialogView.findViewById(R.id.studentEmail);
+            email.setText(student.getEmail());
+
+            TextView dob = (TextView) dialogView.findViewById(R.id.studentDob);
+            dob.setText(student.getDob());
+
+            TextView gpa = (TextView) dialogView.findViewById(R.id.studentGpa);
+            gpa.setText(String.valueOf(student.getMarks()));
+
+            dialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialogBuilder.setCancelable(false);
+            AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.show();
         }
     }
 
