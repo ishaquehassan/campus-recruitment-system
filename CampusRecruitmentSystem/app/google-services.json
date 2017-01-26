@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "715892722176",
+    "firebase_url": "https://marathon-project0.firebaseio.com",
+    "project_id": "marathon-project0",
+    "storage_bucket": "marathon-project0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715892722176:android:4dd81f77c618500b",
+        "android_client_info": {
+          "package_name": "marathon.project0.campusrecruitmentsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715892722176-7tnd57vonncf4oi2da1cc1uehplt5h2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2MqjxEZf4nbRF1zm5nd3VYhSe3-KdsfE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
