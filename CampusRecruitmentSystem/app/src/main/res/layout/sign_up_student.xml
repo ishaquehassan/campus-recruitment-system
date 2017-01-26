@@ -91,11 +91,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/studentDob"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/dobEditTextHint" />
+                android:hint="@string/dobEditTextHint"
+                android:textColor="?attr/editTextColor"
+                android:background="?attr/editTextBackground"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

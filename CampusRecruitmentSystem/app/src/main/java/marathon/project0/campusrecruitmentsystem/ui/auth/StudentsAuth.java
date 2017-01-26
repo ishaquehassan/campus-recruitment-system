@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -90,7 +91,7 @@ public class StudentsAuth extends BaseActivity {
             final EditText studentEmailEt = (EditText) findViewById(R.id.studentEmailEt);
             final EditText studentPasswordEt = (EditText) findViewById(R.id.studentPasswordEt);
             final EditText studentCpasswordEt = (EditText) findViewById(R.id.studentCpasswordEt);
-            final EditText studentDobEt = (EditText) findViewById(R.id.studentDob);
+            final TextView studentDobEt = (TextView) findViewById(R.id.studentDob);
             final EditText studentGpaEt = (EditText) findViewById(R.id.studentGpaEt);
             final RadioGroup genderRadioGroup = (RadioGroup) findViewById(R.id.genderRadioGroup);
             final RadioButton genderMaleRadioBtn = (RadioButton) findViewById(R.id.genderMaleRadioBtn);
