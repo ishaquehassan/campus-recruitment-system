@@ -8,17 +8,15 @@ public class Company {
 
     private String name;
     private String email;
-    private String id;
     private String uid;
 
     public Company() {
 
     }
 
-    public Company(String name, String email, String id, String uid) {
+    public Company(String name, String email, String uid) {
         this.name = name;
         this.email = email;
-        this.id = id;
         this.uid = uid;
     }
 
@@ -41,14 +39,6 @@ public class Company {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUid() {

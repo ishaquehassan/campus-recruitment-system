@@ -67,7 +67,7 @@ public class AdminDashboard extends BaseDashboardActivity {
         pages.add(list2);
         pager.setOffscreenPageLimit(pages.size());
 
-        SimplePagerAdapter adminSignPagerAdapter = new SimplePagerAdapter(getSupportFragmentManager(),pages);
+        SimplePagerAdapter adminSignPagerAdapter = new SimplePagerAdapter(getSupportFragmentManager(), pages);
         pager.setAdapter(adminSignPagerAdapter);
         tabs.setupWithViewPager(pager);
 
@@ -81,38 +81,47 @@ public class AdminDashboard extends BaseDashboardActivity {
     }
 
 
-    public static class CompaniesList extends BaseFragment{
-        public CompaniesList(){
+    public static class CompaniesList extends BaseFragment {
+        public CompaniesList() {
 
         }
+
+        ProgressDialog progressDialog;
+        DatabaseReference companiessNodeRef;
+        List<Company> companies;
+        RecyclerView.Adapter companiesAdapter;
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            setFragmentView(inflater.inflate(R.layout.dashboard_list,container,false));
+            setFragmentView(inflater.inflate(R.layout.dashboard_list, container, false));
 
             final ProgressBar loading = (ProgressBar) findViewById(R.id.loading);
             loading.setVisibility(View.VISIBLE);
 
+            database = FirebaseDatabase.getInstance();
+            companiessNodeRef = database.getReference().child(getResources().getString(R.string.firebaseCompaniesNode));
+
+            progressDialog = BasicFunctionalities.buildProgressDialog("Deleting Item", getContext());
+
             final RecyclerView companiesList = (RecyclerView) findViewById(R.id.recyclerList);
 
-            final List<Company> companies = new ArrayList<>();
+            companies = new ArrayList<>();
 
-            final RecyclerView.Adapter companiesAdapter = new CompaniesAdapter(companies,new BaseListRecyclerAdapter.OnItemClick(){
+            companiesAdapter = new CompaniesAdapter(companies, new BaseListRecyclerAdapter.OnItemClick() {
 
                 @Override
-                public void onItemClick(int position,View v) {
-                    viewDetails(companies.get(position));
+                public void onItemClick(int position, View v) {
+                    viewDetails(companies.get(position), position);
                 }
-            },true);
+            }, true);
 
-            database = FirebaseDatabase.getInstance();
-            DatabaseReference studentsNodeRef = database.getReference().child(getResources().getString(R.string.firebaseCompaniesNode));
-            studentsNodeRef.addChildEventListener(new ChildEventListener() {
+
+            companiessNodeRef.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-                        try{
+                        try {
                             Company company = dataSnapshot.getValue(Company.class);
                             companies.add(company);
                             companiesList.scrollToPosition(companies.size() - 1);
@@ -144,7 +153,7 @@ public class AdminDashboard extends BaseDashboardActivity {
                 }
             });
 
-            studentsNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            companiessNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     loading.setVisibility(View.GONE);
@@ -162,7 +171,7 @@ public class AdminDashboard extends BaseDashboardActivity {
             return getFragmentView();
         }
 
-        private void viewDetails(Company company){
+        private void viewDetails(final Company company, final int position) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.company_view_dialog, null);
@@ -180,58 +189,22 @@ public class AdminDashboard extends BaseDashboardActivity {
                     dialog.dismiss();
                 }
             });
-            dialogBuilder.setCancelable(false);
-            AlertDialog alertDialog = dialogBuilder.create();
-            alertDialog.show();
-        }
-    }
 
-    public static class StudentsList extends BaseFragment{
-        public StudentsList(){
-
-        }
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            setFragmentView(inflater.inflate(R.layout.dashboard_list,container,false));
-
-            final ProgressBar loading = (ProgressBar) findViewById(R.id.loading);
-            loading.setVisibility(View.VISIBLE);
-
-            final ProgressDialog progressDialog = BasicFunctionalities.buildProgressDialog("Deleting Item",getContext());
-
-            database = FirebaseDatabase.getInstance();
-            final DatabaseReference studentsNodeRef = database.getReference().child(getResources().getString(R.string.firebaseStudentsNode));
-
-            final RecyclerView companiesList = (RecyclerView) findViewById(R.id.recyclerList);
-
-            final List<Student> students = new ArrayList<>();
-
-
-
-            final StudentsAdapter studentsAdapter = new StudentsAdapter(students,new BaseListRecyclerAdapter.OnItemClick(){
+            dialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                 @Override
-                public void onItemClick(final int position, View v) {
-                    viewDetails(students.get(position));
-                }
-            },true);
-
-            studentsAdapter.setDeleteClick(new BaseListRecyclerAdapter.OnDeleteClick() {
-                @Override
-                public void onDeleteClick(final int position, View v) {
+                public void onClick(DialogInterface dialog, int which) {
                     progressDialog.show();
-                    studentsNodeRef.child(students.get(position).getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    companiessNodeRef.child(company.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            students.remove(position);
-                            studentsAdapter.notifyItemRemoved(position);
-                            Toast.makeText(getContext(),"Item Deleted",Toast.LENGTH_SHORT).show();
+                            companies.remove(position);
+                            companiesAdapter.notifyItemRemoved(position);
+                            Toast.makeText(getContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(),"Item Deleted",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -239,15 +212,55 @@ public class AdminDashboard extends BaseDashboardActivity {
                             progressDialog.dismiss();
                         }
                     });
+                    dialog.dismiss();
                 }
             });
 
+            dialogBuilder.setCancelable(false);
+            AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
+    public static class StudentsList extends BaseFragment {
+        public StudentsList() {
+
+        }
+
+        DatabaseReference studentsNodeRef;
+        ProgressDialog progressDialog;
+        List<Student> students;
+        StudentsAdapter studentsAdapter;
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            setFragmentView(inflater.inflate(R.layout.dashboard_list, container, false));
+
+            final ProgressBar loading = (ProgressBar) findViewById(R.id.loading);
+            loading.setVisibility(View.VISIBLE);
+
+            progressDialog = BasicFunctionalities.buildProgressDialog("Deleting Item", getContext());
+
+            database = FirebaseDatabase.getInstance();
+            studentsNodeRef = database.getReference().child(getResources().getString(R.string.firebaseStudentsNode));
+
+            final RecyclerView companiesList = (RecyclerView) findViewById(R.id.recyclerList);
+
+            students = new ArrayList<>();
+
+            studentsAdapter = new StudentsAdapter(students, new BaseListRecyclerAdapter.OnItemClick() {
+                @Override
+                public void onItemClick(final int position, View v) {
+                    viewDetails(students.get(position), position);
+                }
+            }, true);
 
             studentsNodeRef.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-                        try{
+                        try {
                             Student student = dataSnapshot.getValue(Student.class);
                             students.add(student);
                             studentsAdapter.notifyItemInserted(students.size() - 1);
@@ -296,7 +309,7 @@ public class AdminDashboard extends BaseDashboardActivity {
             return getFragmentView();
         }
 
-        private void viewDetails(Student student){
+        private void viewDetails(final Student student, final int position) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
             LayoutInflater inflater = getActivity().getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.student_view_dialog, null);
@@ -320,6 +333,32 @@ public class AdminDashboard extends BaseDashboardActivity {
             dialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialogBuilder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    progressDialog.show();
+                    studentsNodeRef.child(student.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            students.remove(position);
+                            studentsAdapter.notifyItemRemoved(position);
+                            Toast.makeText(getContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), "Item Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            progressDialog.dismiss();
+                        }
+                    });
                     dialog.dismiss();
                 }
             });

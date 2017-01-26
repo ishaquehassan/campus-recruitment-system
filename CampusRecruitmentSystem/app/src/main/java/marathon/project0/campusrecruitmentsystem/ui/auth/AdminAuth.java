@@ -1,7 +1,6 @@
 package marathon.project0.campusrecruitmentsystem.ui.auth;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -30,12 +29,10 @@ public class AdminAuth extends BaseActivity {
         ArrayList<BaseFragment> pages = new ArrayList<>();
         SignInFragment signInFragment = new SignInFragment();
         signInFragment.setTitle("ADMIN SIGN IN");
+        signInFragment.setLoginType(1);
         signInFragment.setLoggedInListener(new SignInFragment.OnLoggedInListener() {
             @Override
             public void onLoggedIn() {
-                SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
-                sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),1).apply();
-
                 Intent intent = new Intent(AdminAuth.this, AdminDashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

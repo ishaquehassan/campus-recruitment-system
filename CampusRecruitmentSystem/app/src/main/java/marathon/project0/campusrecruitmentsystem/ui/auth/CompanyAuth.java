@@ -49,15 +49,15 @@ public class CompanyAuth extends BaseActivity {
         ArrayList<BaseFragment> pages = new ArrayList<>();
         SignInFragment signInFragment = new SignInFragment();
         signInFragment.setTitle("COMPANY SIGN IN");
+        signInFragment.setLoginType(2);
         signInFragment.setLoggedInListener(new SignInFragment.OnLoggedInListener() {
             @Override
             public void onLoggedIn() {
-                SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
-                sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),2).apply();
 
                 Intent intent = new Intent(CompanyAuth.this, CompaniesDashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
         pages.add(signInFragment);
@@ -127,18 +127,18 @@ public class CompanyAuth extends BaseActivity {
                                     } else {
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference usersRef = database.getReference(getResources().getString(R.string.firebaseCompaniesNode));
-                                        String key =  usersRef.push().getKey();
-                                        Company company = new Company(name,email,key,auth.getCurrentUser().getUid());
-                                        usersRef.child(key).setValue(company).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        Company company = new Company(name,email,auth.getCurrentUser().getUid());
+                                        usersRef.child(auth.getCurrentUser().getUid()).setValue(company).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
                                                 sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),2).apply();
 
                                                 progressDialog.dismiss();
-                                                Intent intent = new Intent(getContext(), CompaniesDashboard.class);
+                                                Intent intent = new Intent(getActivity(), CompaniesDashboard.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
+                                                getActivity().finish();
                                             }
                                         });
                                     }

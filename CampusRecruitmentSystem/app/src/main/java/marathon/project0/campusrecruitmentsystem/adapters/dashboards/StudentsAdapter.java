@@ -41,17 +41,6 @@ public class StudentsAdapter extends BaseListRecyclerAdapter {
             });
         }
 
-        if(!isAdmin){
-            holder.itemDeleteBtn.setVisibility(View.GONE);
-            if(getDeleteClick() != null){
-                holder.itemDeleteBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getDeleteClick().onDeleteClick(position,null);
-                    }
-                });
-            }
-        }
     }
 
     @Override

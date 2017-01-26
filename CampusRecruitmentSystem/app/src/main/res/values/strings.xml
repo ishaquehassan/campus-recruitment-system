@@ -24,6 +24,7 @@
     <string name="companiesListHeading">COMPANIES</string>
     <string name="studentsListHeading">STUDENTS</string>
     <string name="nameEditTextHint">Name</string>
+    <string name="firebaseAdminNode">admins</string>
     <string name="firebaseCompaniesNode">companies</string>
     <string name="firebaseStudentsNode">students</string>
     <string name="userSahredPrefKey">USER_INFO</string>

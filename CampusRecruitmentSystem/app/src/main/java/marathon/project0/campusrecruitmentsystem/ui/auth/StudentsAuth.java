@@ -54,12 +54,10 @@ public class StudentsAuth extends BaseActivity {
         ArrayList<BaseFragment> pages = new ArrayList<>();
         SignInFragment signInFragment = new SignInFragment();
         signInFragment.setTitle("STUDENT SIGN IN");
+        signInFragment.setLoginType(3);
         signInFragment.setLoggedInListener(new SignInFragment.OnLoggedInListener() {
             @Override
             public void onLoggedIn() {
-                SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);
-                sharedPreferences.edit().putInt(getResources().getString(R.string.userSahredPrefUserType),3).apply();
-
                 Intent intent = new Intent(StudentsAuth.this, StudentsDashboard.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -187,6 +185,7 @@ public class StudentsAuth extends BaseActivity {
                                                 Intent intent = new Intent(getContext(), StudentsDashboard.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
+                                                getActivity().finish();
                                             }
                                         });
                                     }
