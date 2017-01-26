@@ -5,32 +5,32 @@ import android.view.View;
 import java.util.List;
 
 import marathon.project0.campusrecruitmentsystem.base.BaseListRecyclerAdapter;
-import marathon.project0.campusrecruitmentsystem.model.Company;
+import marathon.project0.campusrecruitmentsystem.model.Student;
 
 /**
  * Created by Ishaq Hassan on 1/26/2017.
  */
 
-public class CompaniesAdapter extends BaseListRecyclerAdapter {
-    private List<Company> mDataSet;
-    List<Company> companies;
+public class StudentsAdapter extends BaseListRecyclerAdapter {
+    private List<Student> mDataSet;
+    List<Student> students;
     private boolean isAdmin = false;
 
-    public CompaniesAdapter(List<Company> companies,OnItemClick onItemClick) {
-        this.companies = companies;
+    public StudentsAdapter(List<Student> students, OnItemClick onItemClick) {
+        this.students = students;
         setItemClick(onItemClick);
     }
 
-    public CompaniesAdapter(List<Company> companies,OnItemClick onItemClick,boolean isAdmin) {
-        this.companies = companies;
+    public StudentsAdapter(List<Student> students, OnItemClick onItemClick, boolean isAdmin) {
+        this.students = students;
         setItemClick(onItemClick);
         this.isAdmin = isAdmin;
     }
 
     @Override
-    public void onBindViewHolder(final BaseListRecyclerAdapter.ItemViewHolder holder, final int position) {
-        holder.title.setText(companies.get(position).getName());
-        holder.subTitle.setText(companies.get(position).getEmail());
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
+        holder.title.setText(students.get(position).getName());
+        holder.subTitle.setText(students.get(position).getEmail());
         if(!isAdmin){
             holder.itemDeleteBtn.setVisibility(View.GONE);
         }
@@ -46,6 +46,6 @@ public class CompaniesAdapter extends BaseListRecyclerAdapter {
 
     @Override
     public int getItemCount() {
-        return companies.size();
+        return students.size();
     }
 }

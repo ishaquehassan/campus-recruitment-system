@@ -56,4 +56,10 @@ public class BaseDashboardActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

@@ -9,12 +9,17 @@ public class Company {
     private String name;
     private String email;
     private String id;
+    private String uid;
 
+    public Company() {
 
-    public Company(String name, String email, String id) {
+    }
+
+    public Company(String name, String email, String id, String uid) {
         this.name = name;
         this.email = email;
         this.id = id;
+        this.uid = uid;
     }
 
     public Company(String name, String email) {
@@ -44,5 +49,13 @@ public class Company {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -1,139 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="10dp">
+    android:layout_width="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/signUpHeadingText"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/headingLargeTextSize"
-        android:gravity="left"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentNameEt"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nameEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
+            android:text="@string/signUpHeadingText"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/headingLargeTextSize"
+            android:textStyle="bold" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentIdEt"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/studentIdEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentEmailEt"
-            android:inputType="textEmailAddress"
+            <EditText
+                android:id="@+id/studentNameEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nameEditTextHint"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/emailEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentPasswordEt"
-            android:inputType="textPassword"
+            <EditText
+                android:id="@+id/studentIdEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/studentIdEditTextHint" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/passwordEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/studentEmailEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/emailEditTextHint"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/studentCpasswordEt"
-            android:inputType="textPassword"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/confirmPasswordEditTextHint" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentDob"
+            <EditText
+                android:id="@+id/studentPasswordEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/passwordEditTextHint"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/dobEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/studentGpaEt"
-            android:inputType="numberDecimal"
+            <EditText
+                android:id="@+id/studentCpasswordEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirmPasswordEditTextHint"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/percentageEditTextHint"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="10dp">
 
+            <EditText
+                android:id="@+id/studentDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dobEditTextHint" />
+        </android.support.design.widget.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/genderRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-        <RadioButton
-            android:id="@+id/genderMaleRadioBtn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/genderMaleText"/>
+            android:layout_marginTop="10dp">
 
-        <RadioButton
-            android:id="@+id/genderFemaleRadioBtn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            <EditText
+                android:id="@+id/studentGpaEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/percentageEditTextHint"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <RadioGroup
+            android:id="@+id/genderRadioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/genderFemaleText"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/genderMaleRadioBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/genderMaleText" />
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/headingLargeTextSize"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="@string/signUpBtnText"/>
+            <RadioButton
+                android:id="@+id/genderFemaleRadioBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/genderFemaleText" />
 
-</LinearLayout>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/signUpBtnText"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/headingLargeTextSize" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

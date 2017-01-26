@@ -174,9 +174,8 @@ public class StudentsAuth extends BaseActivity {
                                     } else {
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference usersRef = database.getReference(getResources().getString(R.string.firebaseStudentsNode));
-                                        String key =  usersRef.push().getKey();
-                                        Student student = new Student(name,email,dob,((genderGroupId == R.id.genderMaleRadioBtn) ? 1 : 0),Double.valueOf(gpa));
-                                        usersRef.child(key).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        Student student = new Student(name,studentId,email,dob,((genderGroupId == R.id.genderMaleRadioBtn) ? 1 : 0),Double.valueOf(gpa),auth.getCurrentUser().getUid());
+                                        usersRef.child(auth.getCurrentUser().getUid()).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.userSahredPrefKey),0);

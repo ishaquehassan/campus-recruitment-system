@@ -7,17 +7,25 @@ package marathon.project0.campusrecruitmentsystem.model;
 public class Student {
 
     private String name;
+    private String studentId;
     private String email;
     private String dob;
     private int gender;
     private double marks;
+    private String uid;
 
-    public Student(String name, String email, String dob, int gender, double marks) {
+    public Student(){
+
+    }
+
+    public Student(String name, String studentId, String email, String dob, int gender, double marks, String uid) {
         this.name = name;
+        this.studentId = studentId;
         this.email = email;
         this.dob = dob;
         this.gender = gender;
         this.marks = marks;
+        this.uid = uid;
     }
 
     public String getName() {
@@ -58,6 +66,22 @@ public class Student {
 
     public void setMarks(double marks) {
         this.marks = marks;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }
 

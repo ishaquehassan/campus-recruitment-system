@@ -4,11 +4,13 @@ package marathon.project0.campusrecruitmentsystem.base;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BaseFragment extends Fragment {
-
+    public FirebaseDatabase database;
     private String title;
     private View fragmentView;
 

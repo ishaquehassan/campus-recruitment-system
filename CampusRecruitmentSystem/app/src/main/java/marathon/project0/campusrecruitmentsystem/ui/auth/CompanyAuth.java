@@ -126,7 +126,7 @@ public class CompanyAuth extends BaseActivity {
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference usersRef = database.getReference(getResources().getString(R.string.firebaseCompaniesNode));
                                         String key =  usersRef.push().getKey();
-                                        Company company = new Company(name,email,key);
+                                        Company company = new Company(name,email,key,auth.getCurrentUser().getUid());
                                         usersRef.child(key).setValue(company).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {

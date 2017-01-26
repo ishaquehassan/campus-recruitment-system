@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <EditText
+            android:singleLine="true"
             android:id="@+id/companyNameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
